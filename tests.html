@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <!-- подключаем стили Mocha, для отображения результатов -->
+  <link rel="stylesheet" href="mocha/mocha.css">
+  <!-- подключаем библиотеку Mocha -->
+  <script src="mocha/mocha.min.js"></script>
+  <!-- настраиваем Mocha: предстоит BDD-тестирование -->
+  <script>
+    mocha.setup('bdd');
+  </script>
+
+  <!-- подключаем chai -->
+  <script src="chai/chai.min.js"></script>
+  <!-- в chai есть много всего, выносим assert в глобальную область -->
+  <script>
+    var assert = chai.assert;
+  </script>
+</head>
+
+<body>
+  <script src="jquery.js" charset="utf-8"></script>
+  <script src="lodash.js" charset="utf-8"></script>
+  <script src="core.js" charset="utf-8"></script>
+  
+  
+  <!-- в этом скрипте находятся спеки -->
+  <script src="core.tests.js" charset="utf-8"></script>
+
+  <script>
+  /*
+    function pow(x, n) {
+      return Math.pow(x, n);
+    }
+    
+    describe("pow", function() {
+
+      it("при возведении 2 в 3ю степень результат 8", function() {
+        assert.equal( pow( 2, 3 ), 8 );
+      });
+
+      it("при возведении 3 в 4ю степень равен 81", function() {
+        assert.equal( pow( 3, 4 ), 810 );
+      });
+
+    });*/
+  </script>
+
+  
+
+  <!-- в элементе с id="mocha" будут результаты тестов -->
+  <div id="mocha"></div>
+
+  <!-- запустить тесты! -->
+  <script>
+    mocha.run();
+  </script>
+</body>
+
+</html>
