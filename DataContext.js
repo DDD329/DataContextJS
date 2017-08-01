@@ -258,6 +258,43 @@ dfsIterator({ a: { x: 123 }, b: { y: 456 },c: { z: 789 }}, (key, kp) => console.
 
 keys, key, keypath, value, obj
 */
+function dfsIterator2( obj, callback, direction ) {
+  if( !isComplexType( obj )) throw new TypeError( 'obj' );
+  direction = direction || '>';
+
+  let stack = [];
+
+  let queue = [];
+
+  _.keys( obj ).sort().reverse().forEach((key) => {
+    stack.push({ key: key, keypath: key, value: obj[key], ctx: obj });
+  });
+
+  while(stack.length > 0) {
+    let item = stack.pop();
+
+    if( direction == '>' ) {
+      if( callback(item.key, item.keypath, item.value, item.ctx) === false ) return;
+    }
+
+    if(isComplexType( item.value )) {
+      let ctx = item.value;
+      _.keys( ctx ).sort().reverse().forEach((key) => { stack.push({ key: key, keypath: item.keypath + '.' + key, value: ctx[key], ctx: ctx }); });
+    }
+
+    if(direction == '<') {
+      queue.push(item);
+    }
+  }
+
+  if(direction == '<') {
+      while(queue.length > 0) {
+        let item = queue.shift();
+        if( callback(item.key, item.keypath, item.value, item.ctx) === false ) return;
+      }
+    }
+};
+
 function dfsIterator( obj, callback, direction ) {
   if( !isComplexType( obj )) throw new TypeError( 'obj' );
   direction = direction || '>';
